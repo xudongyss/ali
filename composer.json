@@ -1,0 +1,22 @@
+{
+    "name": "xudongyss/ali",
+    "description": "Ali SDK",
+    "type": "library",
+    "authors": [
+        {
+            "name": "xudong",
+            "email": "xudong.yss@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "alibabacloud/sdk": "*",
+        "alipaysdk/easysdk": "^2.0",
+        "aliyuncs/oss-sdk-php": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "XuDongYss\\Ali\\": "src/"
+        }
+    }
+}
