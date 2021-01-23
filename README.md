@@ -216,7 +216,10 @@ $code = '';
 $templateCode = '';
 /* 短信签名 */
 $signName = '';
-$result = AliCloudSms::sendSms($mobile, $code, $templateCode, $signName);
+/* 短信模板中的自定义参数，除 code 外。非必要参数 */
+$extend = [];
+/* 成功返回接口返回值数组, 失败返回 false, 可通过 getErrorMessage 方法回去错误提示 */
+$result = AliCloudSms::sendSms($mobile, $code, $templateCode, $signName, $extend);
 echo '<pre>';print_r($result);
 //
 ```

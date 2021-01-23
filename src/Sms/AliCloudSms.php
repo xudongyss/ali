@@ -23,7 +23,7 @@ class AliCloudSms extends AliCloudBase{
      * @param string    $templateCode   短信模板
      * @param string    $signName       短信签名
      * @param []		$extend			短信模板中的自定义参数，除 code 外
-     * @return boolean  发送成功返回 true, 失败返回错误信息
+     * @return boolean  成功返回接口返回值数组, 失败返回 false, 可通过 getErrorMessage 方法回去错误提示
      */
     public static function sendSms($mobile, $code, $templateCode, $signName, array $extend = []) {
         try {
@@ -34,7 +34,7 @@ class AliCloudSms extends AliCloudBase{
                 'query'=> [
                     'RegionId' => static::REGIONID,
                     'PhoneNumbers'=> $mobile,
-                    'SignName'=> $signName ? $signName : static::$signName,
+                    'SignName'=> $signName,
                     'TemplateCode'=> $templateCode,
                 	'TemplateParam'=> json_encode($templateParam),
                 ],
