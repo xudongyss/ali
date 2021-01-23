@@ -10,10 +10,7 @@ use AlibabaCloud\Client\Exception\ServerException;
 use XuDongYss\Ali\base\AliCloudBase;
 
 class AliCloudSms extends AliCloudBase{
-    /* 短信签名 */
-    public static $signName = '';
-    
-    /* 基础设置 */
+    /* 基本设置 */
     protected const PRODUCT = 'Dysmsapi';
     protected const VERSION = '2017-05-25';
     protected const HOST = 'dysmsapi.aliyuncs.com';
@@ -25,17 +22,21 @@ class AliCloudSms extends AliCloudBase{
      * @param string    $code           短信验证码
      * @param string    $templateCode   短信模板
      * @param string    $signName       短信签名
+     * @param []		$extend			短信模板中的自定义参数，除 code 外
      * @return boolean  发送成功返回 true, 失败返回错误信息
      */
-    public static function sendSms($mobile, $code, $templateCode, $signName = '') {
+    public static function sendSms($mobile, $code, $templateCode, $signName, array $extend = []) {
         try {
+        	$templateParam = ['code'=> $code];
+        	if($extend) $templateParam = array_merge($templateParam, $extend);
+        	
             $options = [
                 'query'=> [
                     'RegionId' => static::REGIONID,
                     'PhoneNumbers'=> $mobile,
                     'SignName'=> $signName ? $signName : static::$signName,
                     'TemplateCode'=> $templateCode,
-                    'TemplateParam'=> json_encode(['code'=> $code]),
+                	'TemplateParam'=> json_encode($templateParam),
                 ],
             ];
             
@@ -52,11 +53,11 @@ class AliCloudSms extends AliCloudBase{
         }catch(ClientException $e) {
             static::setErrorMessage($e->getErrorMessage());
             
-            return $e->getErrorMessage();
+            return false;
         }catch(ServerException $e) {
             static::setErrorMessage($e->getErrorMessage());
             
-            return $e->getErrorMessage();
+            return false;
         }
     }
     
@@ -92,11 +93,11 @@ class AliCloudSms extends AliCloudBase{
         }catch(ClientException $e) {
             static::setErrorMessage($e->getErrorMessage());
             
-            return $e->getErrorMessage();
+            return false;
         }catch(ServerException $e) {
             static::setErrorMessage($e->getErrorMessage());
             
-            return $e->getErrorMessage();
+            return false;
         }
     }
     
@@ -136,11 +137,11 @@ class AliCloudSms extends AliCloudBase{
         }catch(ClientException $e) {
             static::setErrorMessage($e->getErrorMessage());
             
-            return $e->getErrorMessage();
+            return false;
         }catch(ServerException $e) {
             static::setErrorMessage($e->getErrorMessage());
             
-            return $e->getErrorMessage();
+            return false;
         }
     }
     
@@ -176,11 +177,11 @@ class AliCloudSms extends AliCloudBase{
         }catch(ClientException $e) {
             static::setErrorMessage($e->getErrorMessage());
             
-            return $e->getErrorMessage();
+            return false;
         }catch(ServerException $e) {
             static::setErrorMessage($e->getErrorMessage());
             
-            return $e->getErrorMessage();
+            return false;
         }
     }
     
@@ -189,6 +190,7 @@ class AliCloudSms extends AliCloudBase{
             return $response->toArray();
         }
         
-        return $response['Message'];
+        static::setErrorMessage($response['Message']);
+        return false;
     }
 }
