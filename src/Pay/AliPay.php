@@ -101,7 +101,7 @@ class AliPay extends AliPayBase{
         
         if($result === true) {
             /* 交易支付成功 */
-            if(static::$notifyData[''] === 'TRADE_SUCCESS') {
+            if(static::$notifyData['trade_status'] === 'TRADE_SUCCESS') {
                 return static::notifyData(static::$notifyData);
             }
         }
