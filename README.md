@@ -15,7 +15,7 @@ composer require xudongyss/ali
 ```php
 require_once 'vendor/autoload.php';
 
-use XuDongYss\Ali\Pay\AliPay;
+use xudongyss\ali\pay\AliPay;
 
 $appId = '';
 /* 应用私钥 */
@@ -119,7 +119,7 @@ AliPay::tradeRefund($outTradeNo, $refundAmount);
 ```php
 require_once 'vendor/autoload.php';
 
-use XuDongYss\Ali\Oauth\AliOAuth;
+use xudongyss\ali\oauth\AliOAuth;
 
 $appId = '';
 /* 应用私钥 */
@@ -198,7 +198,7 @@ Array
 ```php
 require_once 'vendor/autoload.php';
 
-use XuDongYss\Ali\Sms\AliCloudSms;
+use xudongyss\ali\sms\AliCloudSms;
 
 $accessKeyId = '';
 $accessSecret = '';
@@ -231,7 +231,7 @@ echo '<pre>';print_r($result);
 ```php
 require_once 'vendor/autoload.php';
 
-use XuDongYss\Ali\Sts\AliCloudSts;
+use xudongyss\ali\sts\AliCloudSts;
 
 $accessKeyId = '';
 $accessSecret = '';
@@ -269,7 +269,7 @@ Array
 ```php
 require_once 'vendor/autoload.php';
 
-use XuDongYss\Ali\Oss\AliCloudOss;
+use xudongyss\ali\oss\AliCloudOss;
 
 $AccessKeyId = '';
 $AccessKeySecret = '';
